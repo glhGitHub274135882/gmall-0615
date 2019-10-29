@@ -68,9 +68,4 @@ public class Query<T> {
 
         return page;
     }
-
-
-
-
-
 }
