@@ -5,3 +5,6 @@ spring:
     nacos:
       config:
         server-addr: 127.0.0.1:8848
+        namespace: 0b2f5844-389c-4b73-aee9-6a7134f726dc
+        group: dev
+        file-extension: yml  # 默认找服务名.properties文件
