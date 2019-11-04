@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 /**
  * @author shkstart
  * @create 2019-10-31 14:32
@@ -27,11 +28,14 @@ public class OSSController {
 
     @GetMapping("policy")
     public Resp<Object> policy(){
-//        用户登录名称 gaole@1848969566671530.onaliyun.com
-//        AccessKey ID LTAI4Fw4TPwgS38hzAjFmd1k
-//        AccessKeySecret Ng559iUVWrUkaau8dTNVJ88XqSmaUU
-        String accessId = "LTAI4Fd3wQu3xVVfN7VyZU2p"; // 请填写您的AccessKeyId。
-        String accessKey = "uCb55syDXvACyeEsRhkx7WOu1DYkfJ"; // 请填写您的AccessKeySecret。
+//        用户登录名称 glh@1848969566671530.onaliyun.com
+//        AccessKey ID LTAI4FkCkPiJK8ULgyMWosTY
+//        AccessKeySecret rCWNfgaFXJquHZYyXa3VASFDeVxuv3
+        // 用户登录名称 xxxxx@1848969566671530.onaliyun.com
+        //AccessKey ID LTAI4FsXaHRnoX5pKMCrzEbz
+        //AccessKeySecret iY5Plqn8GELAOAJs9KhMjopwWn1W07
+        String accessId = "LTAI4FsXaHRnoX5pKMCrzEbz"; // 请填写您的AccessKeyId。
+        String accessKey = "iY5Plqn8GELAOAJs9KhMjopwWn1W07"; // 请填写您的AccessKeySecret。
         String endpoint = "oss-cn-shanghai.aliyuncs.com"; // 请填写您的 endpoint。
         String bucket = "gmall-glh0615"; // 请填写您的 bucketname 。
         String host = "https://" + bucket + "." + endpoint; // host的格式为 bucketname.endpoint
@@ -42,8 +46,8 @@ public class OSSController {
 
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try {
-            long expireTime = 30;
-            long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
+            long expireTime = 10;
+            long expireEndTime = System.currentTimeMillis() + expireTime * 18000;
             Date expiration = new Date(expireEndTime);
             PolicyConditions policyConds = new PolicyConditions();
             policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, 1048576000);

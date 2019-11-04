@@ -1,12 +1,12 @@
 package com.atguigu.gmall.sms.controller;
 
 import java.util.Arrays;
-import java.util.Map;
 
 
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.sms.vo.SaleVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,16 @@ import com.atguigu.gmall.sms.service.SkuBoundsService;
 public class SkuBoundsController {
     @Autowired
     private SkuBoundsService skuBoundsService;
+
+    @ApiOperation("保存")
+    @PostMapping("/sale")
+    @PreAuthorize("hasAuthority('sms:skubounds:save')")
+    public Resp<Object> saveSale(@RequestBody SaleVO saleVO){
+        skuBoundsService.saveSale(saleVO);
+
+        return Resp.ok(null);
+    }
+
 
     /**
      * 列表
