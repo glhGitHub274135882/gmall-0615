@@ -1,14 +1,14 @@
-package com.atguigu.gmall.pms.vo;
+package com.atguigu.gmall.sms.vo;
 
+/**
+ * @author shkstart
+ * @create 2019-11-05 20:11
+ */
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @author shkstart
- * @create 2019-11-03 20:16
- */
 @Data
 public class SaleVO {
 

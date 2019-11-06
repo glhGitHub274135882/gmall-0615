@@ -2,7 +2,6 @@ package com.atguigu.gmall.wms.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 import com.atguigu.core.bean.PageVo;
@@ -15,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.wms.entity.WareSkuEntity;
+import com.atguigu.gmall.entity.WareSkuEntity;
 import com.atguigu.gmall.wms.service.WareSkuService;
 
 

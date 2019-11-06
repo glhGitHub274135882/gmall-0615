@@ -1,12 +1,15 @@
 package com.atguigu.gmall.pms.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.pms.vo.ProductAttrValueVO;
+import com.atguigu.gmall.pms.vo.SpuAttributeValueVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,14 @@ public class ProductAttrValueController {
         PageVo page = productAttrValueService.queryPage(queryCondition);
 
         return Resp.ok(page);
+    }
+    @ApiOperation("es查询spu")
+    @GetMapping("spuId")
+    @PreAuthorize("hasAuthority('pms:productattrvalue:list')")
+    public Resp<List<SpuAttributeValueVO>> querySearchAttrValue(@PathVariable("spuId") Long spuId) {
+        List<SpuAttributeValueVO> attrValueVOS = this.productAttrValueService.querySearchAttrValue(spuId);
+
+        return Resp.ok(attrValueVOS);
     }
 
 
