@@ -17,7 +17,7 @@ import java.util.List;
  * @author shkstart
  * @create 2019-11-06 10:33
  */
-public interface GmallApi {
+public interface GmallPmsApi {
 
     //分页查询(排序)
     @GetMapping("pms/spuinfo/list")
