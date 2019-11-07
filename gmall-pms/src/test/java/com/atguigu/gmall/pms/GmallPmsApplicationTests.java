@@ -1,8 +1,12 @@
 package com.atguigu.gmall.pms;
 
+import com.atguigu.core.bean.PageVo;
+import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.gmall.pms.dao.BrandDao;
 import com.atguigu.gmall.pms.entity.BrandEntity;
+import com.atguigu.gmall.pms.entity.SpuInfoEntity;
 import com.atguigu.gmall.pms.service.BrandService;
+import com.atguigu.gmall.pms.service.SpuInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,10 +16,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Wrapper;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
 class GmallPmsApplicationTests {
+
+    @Autowired
+    private SpuInfoService spuInfoService;
 
     @Autowired
     private BrandDao brandDao;
@@ -45,10 +53,9 @@ class GmallPmsApplicationTests {
 //        System.out.println(page.getRecords());
 //        System.out.println(page.getPages());
 //        System.out.println(page.getTotal());
-        IPage<BrandEntity> page = brandService.page(new Page<BrandEntity>(2l, 2l), new QueryWrapper<>());
-        System.out.println(page.getRecords());
-        System.out.println(page.getPages());
-        System.out.println(page.getTotal());
+        QueryCondition queryCondition = new QueryCondition();
+        PageVo page = spuInfoService.queryPage(queryCondition);
+        System.out.println((List<SpuInfoEntity>) page.getList());
     }
 
 }

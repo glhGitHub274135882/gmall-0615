@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.entity.FeightTemplateEntity;
+import com.atguigu.gmall.wms.entity.FeightTemplateEntity;
 import com.atguigu.gmall.wms.service.FeightTemplateService;
 
 

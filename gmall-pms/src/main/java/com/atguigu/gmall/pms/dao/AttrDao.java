@@ -19,5 +19,4 @@ import java.util.List;
 @Mapper
 public interface AttrDao extends BaseMapper<AttrEntity> {
 
-    List<ProductAttrValueEntity> querySearchAttrValue(Long spuId);
 }

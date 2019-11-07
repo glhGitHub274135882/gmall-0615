@@ -9,7 +9,7 @@ import com.atguigu.core.bean.Query;
 import com.atguigu.core.bean.QueryCondition;
 
 import com.atguigu.gmall.wms.dao.WareOrderTaskDao;
-import com.atguigu.gmall.entity.WareOrderTaskEntity;
+import com.atguigu.gmall.wms.entity.WareOrderTaskEntity;
 import com.atguigu.gmall.wms.service.WareOrderTaskService;
 
 

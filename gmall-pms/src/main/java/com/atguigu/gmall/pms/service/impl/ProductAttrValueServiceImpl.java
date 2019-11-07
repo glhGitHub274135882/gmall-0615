@@ -26,7 +26,7 @@ import com.atguigu.gmall.pms.service.ProductAttrValueService;
 public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao, ProductAttrValueEntity> implements ProductAttrValueService {
 
     @Autowired
-    private AttrDao attrDao;
+    private ProductAttrValueDao attrValueDao;
 
     @Override
     public PageVo queryPage(QueryCondition params) {
@@ -40,7 +40,8 @@ public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao
 
     @Override
     public List<SpuAttributeValueVO> querySearchAttrValue(Long spuId) {
-        List<ProductAttrValueEntity> productAttrValueEntities = this.attrDao.querySearchAttrValue(spuId);
+        List<ProductAttrValueEntity> productAttrValueEntities = this.attrValueDao.querySearchAttrValue(spuId);
+
         return productAttrValueEntities.stream().map(productAttrValueEntity -> {
             SpuAttributeValueVO spuAttributeValueVO = new SpuAttributeValueVO();
             spuAttributeValueVO.setProductAttributeId(productAttrValueEntity.getAttrId());

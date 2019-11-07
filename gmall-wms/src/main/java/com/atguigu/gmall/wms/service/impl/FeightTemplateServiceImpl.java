@@ -9,7 +9,7 @@ import com.atguigu.core.bean.Query;
 import com.atguigu.core.bean.QueryCondition;
 
 import com.atguigu.gmall.wms.dao.FeightTemplateDao;
-import com.atguigu.gmall.entity.FeightTemplateEntity;
+import com.atguigu.gmall.wms.entity.FeightTemplateEntity;
 import com.atguigu.gmall.wms.service.FeightTemplateService;
 
 

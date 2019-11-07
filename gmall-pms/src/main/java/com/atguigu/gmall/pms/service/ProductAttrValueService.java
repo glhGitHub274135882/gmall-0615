@@ -21,6 +21,8 @@ public interface ProductAttrValueService extends IService<ProductAttrValueEntity
 
     PageVo queryPage(QueryCondition params);
 
+//    List<SpuAttributeValueVO> querySearchAttrValue(Long spuId);
+
     List<SpuAttributeValueVO> querySearchAttrValue(Long spuId);
 }
 

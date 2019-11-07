@@ -1,4 +1,4 @@
-package com.atguigu.gmall.entity;
+package com.atguigu.gmall.wms.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -9,7 +9,7 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 商品库存
+ * 库存工作单
  * 
  * @author gaolihong
  * @email 274135882@qq.com
@@ -17,8 +17,8 @@ import lombok.Data;
  */
 @ApiModel
 @Data
-@TableName("wms_ware_sku")
-public class WareSkuEntity implements Serializable {
+@TableName("wms_ware_order_task_detail")
+public class WareOrderTaskDetailEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -33,24 +33,19 @@ public class WareSkuEntity implements Serializable {
 	@ApiModelProperty(name = "skuId",value = "sku_id")
 	private Long skuId;
 	/**
-	 * 仓库id
-	 */
-	@ApiModelProperty(name = "wareId",value = "仓库id")
-	private Long wareId;
-	/**
-	 * 库存数
-	 */
-	@ApiModelProperty(name = "stock",value = "库存数")
-	private Integer stock;
-	/**
 	 * sku_name
 	 */
 	@ApiModelProperty(name = "skuName",value = "sku_name")
 	private String skuName;
 	/**
-	 * 锁定库存
+	 * 购买个数
 	 */
-	@ApiModelProperty(name = "stockLocked",value = "锁定库存")
-	private Integer stockLocked;
+	@ApiModelProperty(name = "skuNum",value = "购买个数")
+	private Integer skuNum;
+	/**
+	 * 工作单id
+	 */
+	@ApiModelProperty(name = "taskId",value = "工作单id")
+	private Long taskId;
 
 }

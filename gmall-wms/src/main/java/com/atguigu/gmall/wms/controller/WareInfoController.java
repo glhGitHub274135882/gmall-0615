@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.entity.WareInfoEntity;
+import com.atguigu.gmall.wms.entity.WareInfoEntity;
 import com.atguigu.gmall.wms.service.WareInfoService;
 
 

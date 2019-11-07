@@ -58,11 +58,34 @@ public class SpuInfoController {
     @ApiOperation("分页查询(排序)")
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('pms:spuinfo:list')")
-    public Resp<PageVo> list(QueryCondition queryCondition) {
+    public Resp<List<SpuInfoEntity>> list(QueryCondition queryCondition) {
         PageVo page = spuInfoService.queryPage(queryCondition);
 
-        return Resp.ok(page);
+        return Resp.ok((List<SpuInfoEntity>)page.getList());
     }
+
+    /**
+     * 列表
+     */
+    @ApiOperation("分页查询(排序)")
+    @PostMapping("/list")
+    @PreAuthorize("hasAuthority('pms:spuinfo:list')")
+    public Resp<List<SpuInfoEntity>> querySpuPage(@RequestBody QueryCondition queryCondition) {
+        PageVo page = spuInfoService.queryPage(queryCondition);
+
+        return Resp.ok((List<SpuInfoEntity>)page.getList());
+    }
+
+/*
+    @ApiOperation("分页查询(排序)")
+    @PostMapping("/list")
+    @PreAuthorize("hasAuthority('pms:spuinfo:list')")
+    public Resp<List<SpuInfoEntity>> querySpuPage(@RequestBody QueryCondition queryCondition) {
+        PageVo page = spuInfoService.queryPage(queryCondition);
+
+        return Resp.ok((List<SpuInfoEntity>)page.getList());
+    }
+*/
 
 
     /**

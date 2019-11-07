@@ -9,7 +9,7 @@ import com.atguigu.core.bean.Query;
 import com.atguigu.core.bean.QueryCondition;
 
 import com.atguigu.gmall.wms.dao.ShAreaDao;
-import com.atguigu.gmall.entity.ShAreaEntity;
+import com.atguigu.gmall.wms.entity.ShAreaEntity;
 import com.atguigu.gmall.wms.service.ShAreaService;
 
 

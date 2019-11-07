@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.entity.WareSkuEntity;
+import com.atguigu.gmall.wms.entity.WareSkuEntity;
 import com.atguigu.gmall.wms.service.WareSkuService;
 
 
@@ -34,7 +34,7 @@ public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
 
-    @ApiOperation("根据skuId查询库存信息")
+   /* @ApiOperation("根据skuId查询库存信息")
     @GetMapping("{skuId}")
     public Resp<List<WareSkuEntity>> queryWareSkuBySkuId(@PathVariable("skuId")Long skuId){
 
@@ -42,7 +42,12 @@ public class WareSkuController {
 
         return Resp.ok(wareSkuEntities);
     }
-
+*/
+   @GetMapping("{skuId}")
+   public Resp<List<WareSkuEntity>> queryWareBySkuId(@PathVariable("skuId")Long skuId){
+       List<WareSkuEntity> wareSkuEntities = this.wareSkuService.list(new QueryWrapper<WareSkuEntity>().eq("sku_id", skuId));
+       return Resp.ok(wareSkuEntities);
+   }
     /**
      * 列表
      */

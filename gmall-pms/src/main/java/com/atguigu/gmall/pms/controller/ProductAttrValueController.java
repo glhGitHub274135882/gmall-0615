@@ -45,12 +45,19 @@ public class ProductAttrValueController {
 
         return Resp.ok(page);
     }
-    @ApiOperation("es查询spu")
-    @GetMapping("spuId")
+/*    @ApiOperation("es查询spu")
+    @GetMapping("{spuId}")
     @PreAuthorize("hasAuthority('pms:productattrvalue:list')")
     public Resp<List<SpuAttributeValueVO>> querySearchAttrValue(@PathVariable("spuId") Long spuId) {
         List<SpuAttributeValueVO> attrValueVOS = this.productAttrValueService.querySearchAttrValue(spuId);
 
+        return Resp.ok(attrValueVOS);
+    }*/
+
+    @GetMapping("{spuId}")
+    public Resp<List<SpuAttributeValueVO>> querySearchAttrValues(@PathVariable("spuId")Long spuId){
+
+        List<SpuAttributeValueVO> attrValueVOS = this.productAttrValueService.querySearchAttrValue(spuId);
         return Resp.ok(attrValueVOS);
     }
 
