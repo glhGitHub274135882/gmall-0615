@@ -9,13 +9,12 @@ import com.atguigu.gmall.pms.vo.SpuInfoVO;
 import com.atguigu.gmall.sms.vo.SaleVO;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -48,6 +47,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
     @Autowired
     private GmallSmsClient smsClient;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     @Override
     public PageVo queryPage(QueryCondition params) {
@@ -166,5 +168,13 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             saleVO.setSkuId(skuId);
             this.smsClient.saveSale(saleVO);
         });
+
+        sendMsg(spuId, "insert");
+    }
+    private void sendMsg(Long spuId, String type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", spuId);
+        map.put("type", type);
+        this.amqpTemplate.convertAndSend("GMALL-ITEM-EXCHANGE", "item." + type, map);
     }
 }
