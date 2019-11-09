@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.sql.Wrapper;
 import java.util.HashMap;
@@ -31,8 +32,14 @@ class GmallPmsApplicationTests {
     @Autowired
     BrandService brandService;
 
+    @Autowired
+    StringRedisTemplate redisTemplate = new StringRedisTemplate();
+
     @Test
     void contextLoads() {
+
+        double stringValueLong = redisTemplate.opsForValue().increment("longKey",6);
+        System.out.println("通过increment(K key, long delta)方法以增量方式存储long值:" + stringValueLong);
     }
 
     @Test
