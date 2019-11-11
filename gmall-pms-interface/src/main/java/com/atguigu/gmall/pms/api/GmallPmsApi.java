@@ -3,15 +3,12 @@ package com.atguigu.gmall.pms.api;
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
-import com.atguigu.gmall.pms.entity.BrandEntity;
-import com.atguigu.gmall.pms.entity.CategoryEntity;
-import com.atguigu.gmall.pms.entity.SkuInfoEntity;
-import com.atguigu.gmall.pms.entity.SpuInfoEntity;
+import com.atguigu.gmall.pms.entity.*;
+import com.atguigu.gmall.pms.vo.CategoryVO;
+import com.atguigu.gmall.pms.vo.GroupVO;
 import com.atguigu.gmall.pms.vo.SpuAttributeValueVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,11 +17,29 @@ import java.util.List;
  * @create 2019-11-06 10:33
  */
 public interface GmallPmsApi {
+    @GetMapping("pms/attrgroup/item/group/{cid}/{spuId}")
+    public Resp<List<GroupVO>> queryGroupVOByCid(@PathVariable("cid")Long cid, @PathVariable("spuId")Long spuId);
 
-   //("分页查询(排序)")
-//    @PostMapping("pms/spuinfo/list")
-//    public Resp<List<SpuInfoEntity>> querySpuPage(@RequestBody QueryCondition queryCondition);
+    //("详情查询")
+    @GetMapping("pms/spuinfodesc/info/{spuId}")
+    public Resp<SpuInfoDescEntity> querySpuDescById(@PathVariable("spuId") Long spuId);
 
+    @GetMapping("pms/skusaleattrvalue/{spuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySaleAttrValues(@PathVariable("spuId")Long spuId);
+
+    //("详情查询")
+    @GetMapping("pms/skuimages/{skuId}")
+    public Resp<List<String>> queryPicsBySkuId(@PathVariable("skuId")Long skuId);
+
+    //("详情查询")
+    @GetMapping("pms/spuinfo/info/{id}")
+    public Resp<SpuInfoEntity> querySpuById(@PathVariable("id") Long id);
+
+    //("详情查询")
+    @GetMapping("pms/skuinfo/info/{skuId}")
+    public Resp<SkuInfoEntity> querySkuById(@PathVariable("skuId") Long skuId);
+
+//("分页查询(排序)")
     @PostMapping("pms/spuinfo/list")
     public Resp<List<SpuInfoEntity>> querySpuPage(@RequestBody QueryCondition queryCondition);
 
@@ -44,6 +59,10 @@ public interface GmallPmsApi {
     @GetMapping("pms/productattrvalue/{spuId}")
     public Resp<List<SpuAttributeValueVO>> querySearchAttrValue(@PathVariable("spuId") Long spuId);
 
-//    @GetMapping("pms/productattrvalue/{spuId}")
-//    public Resp<List<SpuAttributeValueVO>> querySearchAttrValue(@PathVariable("spuId")Long spuId);
+    @GetMapping("pms/category")
+    public Resp<List<CategoryEntity>> queryCategory(@RequestParam(value="level", defaultValue = "0")Integer level
+            , @RequestParam(value="parentCid", required = false)Long parentCid);
+
+    @GetMapping("pms/category/{pid}")
+    public Resp<List<CategoryVO>> queryCategoryWhitSub(@PathVariable("pid")Long pid);
 }

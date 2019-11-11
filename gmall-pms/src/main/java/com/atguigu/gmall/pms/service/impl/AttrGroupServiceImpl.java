@@ -2,9 +2,12 @@ package com.atguigu.gmall.pms.service.impl;
 
 import com.atguigu.gmall.pms.dao.AttrAttrgroupRelationDao;
 import com.atguigu.gmall.pms.dao.AttrDao;
+import com.atguigu.gmall.pms.dao.ProductAttrValueDao;
 import com.atguigu.gmall.pms.entity.AttrAttrgroupRelationEntity;
 import com.atguigu.gmall.pms.entity.AttrEntity;
+import com.atguigu.gmall.pms.entity.ProductAttrValueEntity;
 import com.atguigu.gmall.pms.vo.AttrGroupVO;
+import com.atguigu.gmall.pms.vo.GroupVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,10 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
 
     @Autowired
     private AttrGroupDao attrGroupDao;
+
+    @Autowired
+    private ProductAttrValueDao productAttrValueDao;
+
 
     @Autowired
     private AttrAttrgroupRelationDao relationDao;
@@ -64,9 +71,9 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
     }
 
     @Override
-    public List<AttrGroupVO> queryGroupWithAttrsByCid(Long cid) {
+    public List<AttrGroupVO> queryGroupWithAttrsByCid(Long catId) {
         // 查询所有的分组
-        List<AttrGroupEntity> attrGroupEntities = this.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", cid));
+        List<AttrGroupEntity> attrGroupEntities = this.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catId));
 
         // 查询出每组下的规格参数
         List<AttrGroupVO> attrGroupVOs = attrGroupEntities.stream().map(attrGroupEntity -> {
@@ -74,6 +81,21 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         }).collect(Collectors.toList());
 
         return attrGroupVOs;
+    }
+
+    @Override
+    public List<GroupVO> queryGroupVOByCid(Long cid, Long spuId) {
+        List<AttrGroupEntity> attrGroupEntities = this.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", cid));
+        if (CollectionUtils.isEmpty(attrGroupEntities)){
+            return null;
+        }
+        return attrGroupEntities.stream().map(attrGroupEntity -> {
+            GroupVO groupVO = new GroupVO();
+            groupVO.setGroupName(attrGroupEntity.getAttrGroupName());
+            List<ProductAttrValueEntity> productAttrValueEntities = this.productAttrValueDao.queryByGidAndSpuId(spuId, attrGroupEntity.getAttrGroupId());
+            groupVO.setBaseAttrValues(productAttrValueEntities);
+            return groupVO;
+        }).collect(Collectors.toList());
     }
 
     @Override

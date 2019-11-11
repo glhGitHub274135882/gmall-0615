@@ -16,4 +16,5 @@ public interface GmallWmsApi {
     //("根据skuId查询库存信息")
     @GetMapping("wms/waresku/{skuId}")
     public Resp<List<WareSkuEntity>> queryWareBySkuId(@PathVariable("skuId")Long skuId);
+
 }

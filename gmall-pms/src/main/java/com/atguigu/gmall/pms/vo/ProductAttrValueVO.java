@@ -12,11 +12,15 @@ import java.util.List;
  * @create 2019-11-03 16:19
  */
 public class ProductAttrValueVO extends ProductAttrValueEntity {
-        public void setValueSelected(List<Object> valueSelected){
+    /*    public void setValueSelected(List<Object> valueSelected){
             // 如果接受的集合为空，则不设置
             if (CollectionUtils.isEmpty(valueSelected)){
                 return;
             }
             this.setAttrValue(StringUtils.join(valueSelected, ","));
-        }
+        }*/
+    public void setValueSelected(List<String> valueSelected){
+
+        this.setAttrValue(StringUtils.join(valueSelected, ","));
+    }
 }
