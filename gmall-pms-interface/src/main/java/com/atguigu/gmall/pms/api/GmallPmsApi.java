@@ -17,6 +17,10 @@ import java.util.List;
  * @create 2019-11-06 10:33
  */
 public interface GmallPmsApi {
+
+    @GetMapping("pms/skusaleattrvalue/sku/{skuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySaleAttrBySkuId(@PathVariable("skuId")Long skuId);
+
     @GetMapping("pms/attrgroup/item/group/{cid}/{spuId}")
     public Resp<List<GroupVO>> queryGroupVOByCid(@PathVariable("cid")Long cid, @PathVariable("spuId")Long spuId);
 

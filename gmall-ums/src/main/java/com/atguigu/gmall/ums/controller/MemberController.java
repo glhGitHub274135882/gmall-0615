@@ -1,5 +1,6 @@
 package com.atguigu.gmall.ums.controller;
 
+import java.lang.reflect.Member;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -33,6 +34,22 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @GetMapping("query")
+    public Resp<MemberEntity> queryUser(@RequestParam("username")String userName,@RequestParam("password")String password){
+        MemberEntity memberEntity = memberService.queryUser(userName,password);
+        return Resp.ok(memberEntity);
+    }
+    @GetMapping("check/{data}/{type}")
+    public Resp<Boolean> checkData(@PathVariable("data")String data,@PathVariable("type")Integer type){
+        Boolean b = this.memberService.checkData(data,type);
+        return Resp.ok(b);
+    }
+
+    @PostMapping("register")
+    public Resp<Object> registe(MemberEntity memberEntity,@RequestParam("code")String code){
+        this.memberService.register(memberEntity,code);
+        return Resp.ok(null);
+    }
     /**
      * 列表
      */

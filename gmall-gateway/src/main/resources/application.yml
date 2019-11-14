@@ -10,6 +10,8 @@ spring:
           uri: lb://pms-service
           predicates:
             - Path=/pms/**
+#          filters:
+#            - Auth
         - id: sms-route
           uri: lb://sms-service
           predicates:
@@ -38,6 +40,29 @@ spring:
             - Path=/api/index/**
           filters:
             - RewritePath=/api(?<segment>/?.*), $\{segment}
+        - id: item-route # 商品详情路由
+          uri: lb://item-service
+          predicates:
+            - Path=/api/item/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: auth-service # 授权中心
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: cart-service # 购物车中心
+          uri: lb://cart-service
+          predicates:
+            - Path=/api/cart/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+auth:
+  jwt:
+    publicKeyPath: F:\\project\\temp\\rsa.pub
+    cookieName: GMALL_TOKEN
