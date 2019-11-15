@@ -28,6 +28,21 @@ public class CartController {
         List<Cart> carts = this.cartService.queryCarts();
         return Resp.ok(carts);
     }
+    @PostMapping("update")
+    public Resp<Object> updateCarts(@RequestBody Cart cart){
+        this.cartService.updateCart(cart);
+        return Resp.ok(null);
+    }
+    @PostMapping("check")
+    public Resp<Object> checkCarts(@RequestBody List<Cart> carts){
+        this.cartService.checkCart(carts);
+        return Resp.ok(null);
+    }
+    @PostMapping("{skuId}")
+    public Resp<Object> deleteCarts(@PathVariable("skuId") Long skuId){
+        this.cartService.deleteCart(skuId);
+        return Resp.ok(null);
+    }
 
 /*    @GetMapping
     public UserInfo test(HttpServletRequest request){

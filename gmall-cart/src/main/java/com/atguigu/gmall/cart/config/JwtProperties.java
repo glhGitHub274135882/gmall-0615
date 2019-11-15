@@ -34,7 +34,7 @@ public class JwtProperties {
             // 3. 读取密钥
             publicKey = RsaUtils.getPublicKey(publicKeyPath);
         } catch (Exception e) {
-            log.error("初始化公钥和私钥失败！！！");
+            log.error("初始化公钥失败！！！");
             e.printStackTrace();
         }
     }

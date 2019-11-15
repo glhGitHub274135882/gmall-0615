@@ -119,6 +119,55 @@ public class CartServiceImpl implements CartService {
         return userIdCartJsonList.stream().map(userIdCartJson -> JSON.parseObject(userIdCartJson.toString(), Cart.class)).collect(Collectors.toList());
     }
 
+    @Override
+    public void updateCart(Cart cart) {
+
+        String key = getKey();
+
+        Integer count = cart.getCount();
+
+        BoundHashOperations<String, Object, Object> hashOps = this.redisTemplate.boundHashOps(key);
+        if (hashOps.hasKey(cart.getSkuId().toString())) {
+            // 获取购物车中的更新数量的购物记录
+            String cartJson = hashOps.get(cart.getSkuId().toString()).toString();
+            cart = JSON.parseObject(cartJson, Cart.class);
+            cart.setCount(count);
+            hashOps.put(cart.getSkuId().toString(), JSON.toJSONString(cart));
+        }
+    }
+
+    @Override
+    public void deleteCart(Long skuId) {
+
+        String key = getKey();
+
+        BoundHashOperations<String, Object, Object> hashOps = this.redisTemplate.boundHashOps(key);
+        if (hashOps.hasKey(skuId.toString())) {
+
+            hashOps.delete(skuId.toString());
+        }
+
+    }
+
+    @Override
+    public void checkCart(List<Cart> carts) {
+
+        String key = getKey();
+
+        BoundHashOperations<String, Object, Object> hashOps = this.redisTemplate.boundHashOps(key);
+
+        carts.forEach(cart -> {
+            Boolean check = cart.getCheck();
+            if (hashOps.hasKey(cart.getSkuId().toString())) {
+                // 获取购物车中的更新数量的购物记录
+                String cartJson = hashOps.get(cart.getSkuId().toString()).toString();
+                cart = JSON.parseObject(cartJson, Cart.class);
+                cart.setCheck(check);
+                hashOps.put(cart.getSkuId().toString(), JSON.toJSONString(cart));
+            }
+        });
+    }
+
     public String getKey(){
         String key = KEY_PREFIX;
         UserInfo userInfo = LoginInterceptor.get();

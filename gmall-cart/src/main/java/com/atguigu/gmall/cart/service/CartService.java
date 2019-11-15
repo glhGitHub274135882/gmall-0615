@@ -12,4 +12,10 @@ public interface CartService {
     void addCart(Cart cart);
 
     List<Cart> queryCarts();
+
+    void updateCart(Cart cart);
+
+    void deleteCart(Long skuId);
+
+    void checkCart(List<Cart> carts);
 }
