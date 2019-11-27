@@ -7,9 +7,11 @@ import java.util.List;
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.wms.vo.SkuLockVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,14 @@ public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
 
+    @PostMapping("check/lock")
+    public Resp<Object> checkAndLock(@RequestBody List<SkuLockVO> skuLockVOS){
+        String msg = this.wareSkuService.checkAndLock(skuLockVOS);
+        if(StringUtils.isBlank(msg)){
+            return Resp.fail(msg);
+        }
+        return Resp.ok(null);
+    }
    /* @ApiOperation("根据skuId查询库存信息")
     @GetMapping("{skuId}")
     public Resp<List<WareSkuEntity>> queryWareSkuBySkuId(@PathVariable("skuId")Long skuId){

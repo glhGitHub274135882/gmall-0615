@@ -7,9 +7,12 @@ import java.util.Map;
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.oms.vo.OrderSubmitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +35,12 @@ import com.atguigu.gmall.oms.service.OrderService;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+
+    @PostMapping
+    public Resp<OrderEntity> createOrder(@RequestBody OrderSubmitVO submimVO){
+        OrderEntity orderEntity = this.orderService.createOrder(submimVO);
+        return Resp.ok(orderEntity);
+    }
 
     /**
      * 列表

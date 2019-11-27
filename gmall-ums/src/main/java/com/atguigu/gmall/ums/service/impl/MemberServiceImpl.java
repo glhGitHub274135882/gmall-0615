@@ -1,7 +1,9 @@
 package com.atguigu.gmall.ums.service.impl;
 
+import com.atguigu.gmall.ums.feign.GmallMsmClient;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,6 +24,10 @@ import com.atguigu.gmall.ums.service.MemberService;
 
 @Service("memberService")
 public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> implements MemberService {
+
+    @Autowired
+    private GmallMsmClient gmallMsmClient;
+
 
     @Override
     public PageVo queryPage(QueryCondition params) {
@@ -46,7 +52,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
     }
     public void register(MemberEntity memberEntity,String code){
         //生成验证码TODO
-
+        this.gmallMsmClient.sendCode("code");
         //生成盐
         String salt = StringUtils.substring(UUID.randomUUID().toString(), 0, 6);
         memberEntity.setSalt(salt);
